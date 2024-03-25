@@ -27,4 +27,4 @@ jobs:
       run: |
         conda config --set anaconda_upload no
         cd dxtbx_recipe
-        conda build .
+        conda build . --python 3.9
