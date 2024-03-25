@@ -1,0 +1,15 @@
+diff --git src/dxtbx/format/FormatEigerStream.py src/dxtbx/format/FormatEigerStream.py
+new file mode 100644
+index 00000000..8e7ee6c4
+--- /dev/null
++++ src/dxtbx/format/FormatEigerStream.py
+@@ -0,0 +1,9 @@
++from __future__ import annotations
++
++from dxtbx.format.Format import Format
++
++
++class FormatEigerStream(Format):
++    @staticmethod
++    def understand(image_file):
++        return False

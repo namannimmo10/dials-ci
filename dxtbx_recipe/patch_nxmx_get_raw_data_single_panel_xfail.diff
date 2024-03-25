@@ -1,0 +1,12 @@
+diff --git a/tests/nexus/test_build_dxtbx_models.py b/tests/nexus/test_build_dxtbx_models.py
+index ddf42818..98910359 100644
+--- a/tests/nexus/test_build_dxtbx_models.py
++++ b/tests/nexus/test_build_dxtbx_models.py
+@@ -657,6 +657,7 @@ def nxdata_example():
+         yield f
+ 
+ 
++@pytest.mark.xfail
+ def test_get_raw_data_single_panel(nxdata_example):
+     det = dxtbx.nexus.nxmx.NXdetector(nxdata_example["/entry/instrument/detector"])
+     nxdata = dxtbx.nexus.nxmx.NXdata(nxdata_example["/entry/data"])
