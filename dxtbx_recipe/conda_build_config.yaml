@@ -1,0 +1,8 @@
+c_compiler:   # [unix]
+  - gcc       # [unix]
+c_compiler_version:   # [unix]
+  - 8         # [unix]
+cxx_compiler:   # [unix]
+  - gxx       # [unix]
+cxx_compiler_version:   # [unix]
+  - 8         # [unix]
