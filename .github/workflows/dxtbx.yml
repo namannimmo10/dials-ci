@@ -9,16 +9,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10']
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Conda
       uses: conda-incubator/setup-miniconda@v3
       with:
         auto-update-conda: true
         channels: conda-forge,defaults
-        python-version: 3.9
+        python-version: ${{ matrix.python-version }}
 
     - name: Install conda-build and anaconda-client
       run: |
@@ -29,7 +32,8 @@ jobs:
       run: |
         conda config --set anaconda_upload no
         cd dxtbx_recipe
-        conda build . --python 3.9
+        sed -i 's/python =3.9/python =${{ matrix.python-version }}/g' meta.yaml
+        conda build . --python ${{ matrix.python-version }}
 
     - name: Upload dxtbx to anaconda
       env:
