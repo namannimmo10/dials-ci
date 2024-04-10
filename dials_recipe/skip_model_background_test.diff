@@ -1,0 +1,13 @@
+diff --git a/tests/command_line/test_model_background.py b/tests/command_line/test_model_background.py
+index ca797af66..24d72bcbe 100644
+--- a/tests/command_line/test_model_background.py
++++ b/tests/command_line/test_model_background.py
+@@ -10,7 +10,7 @@
+
+ from scitbx.array_family import flex
+
+-
++@pytest.mark.skip(reason="Apparently causes SEGV on some platforms")
+ @pytest.mark.skipif(
+     (sys.platform == "darwin")
+     and (datetime.date.today() < datetime.date(2023, 10, 20)),

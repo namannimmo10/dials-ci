@@ -1,4 +1,4 @@
-name: Build, test, and upload dxtbx
+name: Build, test, and upload dxtbx and DIALS
 
 on:
   push:
@@ -20,7 +20,8 @@ jobs:
       uses: conda-incubator/setup-miniconda@v3
       with:
         auto-update-conda: true
-        channels: conda-forge,defaults
+        channels: namannimmo,conda-forge,defaults
+        channel-priority: strict
         python-version: ${{ matrix.python-version }}
 
     - name: Install mamba, boa and anaconda-client
@@ -41,3 +42,17 @@ jobs:
       run: |
         export CONDA_BLD_PATH=/usr/share/miniconda/conda-bld
         anaconda -t $ANACONDA_API_TOKEN upload --skip $CONDA_BLD_PATH/linux-64/dxtbx-*.tar.bz2
+
+    - name: Build & test DIALS
+      run: |
+        conda config --set anaconda_upload no
+        cd dials_recipe
+        sed -i 's/python =3.9/python =${{ matrix.python-version }}/g' meta.yaml
+        conda mambabuild . --python ${{ matrix.python-version }}
+
+    - name: Upload DIALS to anaconda
+      env:
+        ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_API_TOKEN }}
+      run: |
+        export CONDA_BLD_PATH=/usr/share/miniconda/conda-bld
+        anaconda -t $ANACONDA_API_TOKEN upload --skip $CONDA_BLD_PATH/linux-64/dials-*.tar.bz2
