@@ -21,7 +21,7 @@ jobs:
       with:
         auto-update-conda: true
         channels: namannimmo,conda-forge,defaults
-        channel-priority: strict
+        channel-priority: flexible
         python-version: ${{ matrix.python-version }}
 
     - name: Install mamba, boa and anaconda-client
