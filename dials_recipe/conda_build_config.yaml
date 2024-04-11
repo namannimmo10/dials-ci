@@ -1,6 +1,0 @@
-channels:
-  - namannimmo
-  - defaults
-  - conda-forge
-
-channel_priority: flexible

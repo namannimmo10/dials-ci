@@ -47,8 +47,10 @@ jobs:
       run: |
         conda config --set anaconda_upload no
         cd dials_recipe
+        conda config --add channels conda-forge
+        conda config --show channels
         sed -i 's/python =3.9/python =${{ matrix.python-version }}/g' meta.yaml
-        conda mambabuild . --python ${{ matrix.python-version }}
+        conda mambabuild . --python ${{ matrix.python-version }} -c conda-forge
 
     - name: Upload DIALS to anaconda
       env:
