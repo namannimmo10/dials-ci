@@ -26,7 +26,7 @@ jobs:
 
     - name: Install mamba, boa and anaconda-client
       run: |
-        conda install mamba boa anaconda-client -y
+        conda install mamba boa anaconda-client constructor -y
         echo "$(conda info --base)/bin" >> $GITHUB_PATH
 
     - name: Build & test dxtbx
@@ -58,3 +58,13 @@ jobs:
       run: |
         export CONDA_BLD_PATH=/usr/share/miniconda/conda-bld
         anaconda -t $ANACONDA_API_TOKEN upload --skip $CONDA_BLD_PATH/linux-64/dials-*.tar.bz2
+
+    - name: Build conda installer using constructor
+      run: |
+        constructor ./
+
+    - name: Upload installer artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: conda-installer
+        path: ./*.sh

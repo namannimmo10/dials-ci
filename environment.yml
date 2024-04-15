@@ -1,0 +1,5 @@
+name: dials-installer-env
+channels:
+  - defaults
+dependencies:
+  - dials

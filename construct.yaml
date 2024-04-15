@@ -1,0 +1,7 @@
+name: dials-installer
+version: "3.18.0"
+channels:
+  - defaults
+installer_type: all
+environment_file: environment.yml
+initialize_by_default: true
