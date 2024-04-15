@@ -62,9 +62,10 @@ jobs:
     - name: Build conda installer using constructor
       run: |
         constructor ./
+        mv dials-installer-*.sh dials-installer-${{ matrix.python-version }}.sh
 
     - name: Upload installer artifact
       uses: actions/upload-artifact@v4
       with:
-        name: conda-installer
-        path: ./*.sh
+        name: conda-installer-${{ matrix.python-version }}
+        path: ./dials-installer-${{ matrix.python-version }}.sh
