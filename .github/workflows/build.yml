@@ -36,6 +36,10 @@ jobs:
         sed -i 's/python =3.9/python =${{ matrix.python-version }}/g' meta.yaml
         conda mambabuild . --python ${{ matrix.python-version }}
 
+    - name: Locate pytest-report.html
+      run: |
+        find /home/runner -name pytest-report.html
+
     - name: Upload dxtbx to anaconda
       env:
         ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_API_TOKEN }}
