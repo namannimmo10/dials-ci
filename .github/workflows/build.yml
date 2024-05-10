@@ -20,7 +20,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v3
       with:
         auto-update-conda: true
-        channels: namannimmo,conda-forge,defaults
+        channels: conda-forge
         channel-priority: flexible
         python-version: ${{ matrix.python-version }}
 
@@ -51,7 +51,6 @@ jobs:
       run: |
         conda config --set anaconda_upload no
         cd dials_recipe
-        conda config --add channels conda-forge
         conda config --show channels
         sed -i 's/python =3.9/python =${{ matrix.python-version }}/g' meta.yaml
         conda mambabuild . --python ${{ matrix.python-version }} -c conda-forge
