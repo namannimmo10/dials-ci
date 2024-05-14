@@ -86,7 +86,7 @@ test:
   imports:
     - dxtbx.ext
   commands:
-    - pytest $SRC_DIR/dxtbx/tests --regression --html=pytest-report.html --junitxml=pytest-results.xml  # [not win]
+    - pytest $SRC_DIR/dxtbx/tests --regression --html=/home/runner/pytest-report-dxtbx.html --junitxml=/home/runner/pytest-results-dxtbx.xml  # [not win]
     - pytest %SRC_DIR%/dxtbx/tests --regression  # [win]
     - pip check
 

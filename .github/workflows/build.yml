@@ -35,10 +35,13 @@ jobs:
         cd dxtbx_recipe
         sed -i 's/python =3.9/python =${{ matrix.python-version }}/g' meta.yaml
         conda mambabuild . --python ${{ matrix.python-version }}
+        mv /home/runner/pytest-report-dxtbx.html /home/runner/pytest-report-dxtbx-${{ matrix.python-version }}.html
 
-    - name: Locate pytest-report.html
-      run: |
-        find /home/runner -name pytest-report.html
+    - name: Upload DXTBX pytest result
+      uses: actions/upload-artifact@v4
+      with:
+        name: pytest-report-dxtbx-${{ matrix.python-version }}
+        path: /home/runner/pytest-report-dxtbx-${{ matrix.python-version }}.html
 
     - name: Upload dxtbx to anaconda
       env:
@@ -54,6 +57,13 @@ jobs:
         conda config --show channels
         sed -i 's/python =3.9/python =${{ matrix.python-version }}/g' meta.yaml
         conda mambabuild . --python ${{ matrix.python-version }} -c conda-forge
+        mv /home/runner/pytest-report-dials.html /home/runner/pytest-report-dials-${{ matrix.python-version }}.html
+
+    - name: Upload DIALS pytest result
+      uses: actions/upload-artifact@v4
+      with:
+        name: pytest-report-dials-${{ matrix.python-version }}
+        path: /home/runner/pytest-report-dials-${{ matrix.python-version }}.html
 
     - name: Upload DIALS to anaconda
       env:
